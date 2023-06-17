@@ -18,7 +18,9 @@ package controller
 
 import (
 	"context"
+	"fmt"
 
+	cmapiv1 "github.com/cert-manager/cert-manager/pkg/apis/certmanager/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -48,6 +50,11 @@ func (r *CertificateReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 	_ = log.FromContext(ctx)
 
 	// TODO(user): your logic here
+	var certificate cmapiv1.Certificate
+	if err := r.Get(ctx, req.NamespacedName, &certificate); err != nil {
+		return ctrl.Result{}, client.IgnoreNotFound(err)
+	}
+	fmt.Println(certificate)
 
 	return ctrl.Result{}, nil
 }
@@ -55,7 +62,6 @@ func (r *CertificateReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 // SetupWithManager sets up the controller with the Manager.
 func (r *CertificateReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		// Uncomment the following line adding a pointer to an instance of the controlled resource as an argument
-		// For().
+		For(&cmapiv1.Certificate{}).
 		Complete(r)
 }
