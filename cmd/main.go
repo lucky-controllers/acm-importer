@@ -33,6 +33,7 @@ import (
 
 	"github.com/lucky-controllers/acm-importer/internal/controller"
 	//+kubebuilder:scaffold:imports
+	cmapiv1 "github.com/cert-manager/cert-manager/pkg/apis/certmanager/v1"
 )
 
 var (
@@ -44,6 +45,7 @@ func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
 	//+kubebuilder:scaffold:scheme
+	_ = cmapiv1.AddToScheme(scheme)
 }
 
 func main() {
