@@ -1,5 +1,13 @@
 # acm-importer
-// TODO(user): Add simple overview of use/purpose
+POC work for ACM spike
+
+At the moment, it just watches for events related to Certificate objects and logs it.
+
+Still need to work on:
+- pulling certificate credentials for a cert
+- setting up aws acm client
+- importing cert to acm
+- matching/comparing existing cert with acm cert
 
 ## Description
 // TODO(user): An in-depth paragraph about your project and overview of use
